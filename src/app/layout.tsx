@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import GlobalStyles from '@/styles/GlobalStyles'
 import StyledComponentsRegistry from '@/lib/registry'
+import Providers from '@/components/Providers'
 
 export const metadata: Metadata = {
   title: 'Twin example',
@@ -15,10 +16,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyles />
-          {children}
-        </StyledComponentsRegistry>
+        <Providers>
+          <StyledComponentsRegistry>
+            <GlobalStyles />
+            {/* <Navbar /> */}
+            {children}
+          </StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   )

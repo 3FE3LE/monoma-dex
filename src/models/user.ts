@@ -4,16 +4,16 @@ const userSchema = new Schema({
   email: {
     type : String,
     unique: true,
-    required: true,
+    required: [true, "Email is required"],
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "password is required"],
     select: false 
   },
   fullName: {
     type:String ,
-    required: true,
+    required: [true, "Full name y required"],
     maxLength: 50,
     minLength: 3
   }

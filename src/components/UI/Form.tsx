@@ -31,7 +31,7 @@ mx-auto
 p-6
 bg-white
 shadow-md
-rounded-md
+rounded-3xl
 w-full
 `
 

@@ -2,16 +2,17 @@ import tw from 'twin.macro'
 import Navbar from './Navbar'
 
 const Container = tw.main`
-h-screen
+min-h-screen
 bg-gradient-to-b
-from-electric
-to-ribbon
+from-green-500
+to-green-100
 `
 const MainContent = tw.section`
+relative
 flex
 flex-col
 justify-center
-h-[calc(100vh-4rem)]
+min-h-[calc(100vh-5rem)]
 `
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

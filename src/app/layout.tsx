@@ -4,8 +4,8 @@ import StyledComponentsRegistry from '@/lib/registry'
 import Providers from '@/components/Providers'
 
 export const metadata: Metadata = {
-  title: 'Twin example',
-  description: '',
+  title: 'PMKdex',
+  description: 'explore Pokemon data',
 }
 
 export default function RootLayout({
@@ -19,7 +19,6 @@ export default function RootLayout({
         <Providers>
           <StyledComponentsRegistry>
             <GlobalStyles />
-            {/* <Navbar /> */}
             {children}
           </StyledComponentsRegistry>
         </Providers>

@@ -1,28 +1,32 @@
 import Link from 'next/link'
 import React from 'react'
 import tw from 'twin.macro'
-import {getServerSession} from "next-auth"
+import { getServerSession } from 'next-auth'
 
 const NavbarWrapper = tw.nav`
-  p-4
+  p-5
   flex
   justify-between
   items-center
+  shadow-md
 `
 
 const NavbarLogo = tw.div`
   text-white
-  text-lg
+  text-4xl
   font-bold
 `
 
 const NavbarLinks = tw.ul`
-  space-x-4
+space-x-2  
+sm:space-x-5
+  
 `
 
 const NavbarLink = tw.li`
   text-white
-  hover:text-blue-200
+  transition-all
+  hover:text-green-800
   cursor-pointer
   inline
 `
@@ -30,13 +34,10 @@ const NavbarLink = tw.li`
 const Navbar = () => {
   return (
     <NavbarWrapper>
-      <NavbarLogo>Logo</NavbarLogo>
+      <NavbarLogo>PKMdex</NavbarLogo>
       <NavbarLinks>
         <NavbarLink>
           <Link href={'/About'}>About</Link>
-        </NavbarLink>
-        <NavbarLink>
-          <Link href={'/sign-up'}>Sign Up</Link>
         </NavbarLink>
         <NavbarLink>
           <Link href={'/sign-in'}>Sign In</Link>

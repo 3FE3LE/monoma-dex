@@ -36,22 +36,18 @@ export default function SignIn() {
 
   return (
     <Layout>
-      <Form title='Login' handleSubmit={handleSubmit(onSubmit)}>
-          <div tw="mb-4">
-        <div tw="text-red-500">{error}</div>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <FormInput type="email" id="email" {...register('email')} />
-            <div tw="text-red-500">{errors.email?.message}</div>
-          </div>
-          <div tw="mb-4">
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <FormInput
-              type="password"
-              id="password"
-              {...register('password')}
-            />
-            <div tw="text-red-500">{errors.password?.message}</div>
-          </div>
+      <Form title="Login" handleSubmit={handleSubmit(onSubmit)}>
+        <div tw="mb-4">
+          <div tw="text-red-500">{error}</div>
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <FormInput type="email" id="email" {...register('email')} />
+          <div tw="text-red-500">{errors.email?.message}</div>
+        </div>
+        <div tw="mb-4">
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <FormInput type="password" id="password" {...register('password')} />
+          <div tw="text-red-500">{errors.password?.message}</div>
+        </div>
       </Form>
     </Layout>
   )

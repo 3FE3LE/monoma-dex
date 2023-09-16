@@ -29,12 +29,12 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ account, token, user, profile, session }) {
+    jwt({  token, user }) {
       if (user) token.user = user
       return token
     },
     session({ session, token }) {
-      session.user = token.user as any
+      session.user = {name:token.user.fullName, email:token.user.email} 
       return session
     },
   },

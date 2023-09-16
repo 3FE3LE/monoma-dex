@@ -1,8 +1,12 @@
 'use client'
-import { Layout } from '@/components/UI'
 import { useSession } from 'next-auth/react'
+import { Layout } from '@/components/UI'
 
-export default function page() {
+export default function Profile() {
   const { data: session } = useSession()
-  return <Layout><pre>{JSON.stringify(session, null, 2)}</pre></Layout>
+  return (
+    <Layout>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
+    </Layout>
+  )
 }

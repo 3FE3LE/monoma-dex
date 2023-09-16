@@ -1,11 +1,10 @@
-import React, { Fragment, useState } from 'react'
-import tw from 'twin.macro'
-import { XClose } from '../Icons'
 import Image from 'next/image'
 import { PokemonI } from '@/types'
-import { staticBlurDataRyl } from '@/utils/staticBlurDataUrl'
+import { staticBlurDataUrl } from '@/utils'
+import tw from 'twin.macro'
+import { XClose } from '../Icons'
+import PokemonChartStats from './PokemonChartStats'
 import PokemonTypePill from './PokemonTypePill'
-import { PokemonChartStats } from './PokemonChartStats'
 
 const ModalOverlay = tw.div`
   fixed
@@ -99,7 +98,7 @@ interface ModalProps {
   pokemon: PokemonI
 }
 
-const Modal = ({ isOpen, onClose, pokemon }: ModalProps) => {
+export default function Modal({ isOpen, onClose, pokemon }: ModalProps) {
   if (!isOpen) return null
 
   const { img, name, height, weight, id, abilities, moves, stats, types } =
@@ -107,6 +106,9 @@ const Modal = ({ isOpen, onClose, pokemon }: ModalProps) => {
 
   const movements = moves.slice(0, 4)
   const mainType = types[0]
+  const handsToFoots = (height/3).toFixed(1)
+  const pokemonLbs = weight/10
+
 
   return (
     <ModalOverlay>
@@ -124,14 +126,14 @@ const Modal = ({ isOpen, onClose, pokemon }: ModalProps) => {
             width={500}
             height={500}
             placeholder="blur"
-            blurDataURL={staticBlurDataRyl()}
+            blurDataURL={staticBlurDataUrl()}
           />
           <ModalInfo>
             <PokemonChartStats data={stats} />
-            <ModalLabel>id: {id}</ModalLabel>
+            <ModalLabel>Dex #{id}</ModalLabel>
             <div tw="flex gap-5 items-center">
-              <ModalLabel>weight: {weight}</ModalLabel>
-              <ModalLabel>height: {height}</ModalLabel>
+              <ModalLabel>weight: {pokemonLbs}Lbs </ModalLabel>
+              <ModalLabel>height: {handsToFoots}fts</ModalLabel>
             </div>
             <div tw="flex gap-2 items-center">
               <ModalLabel>types: </ModalLabel>
@@ -155,5 +157,3 @@ const Modal = ({ isOpen, onClose, pokemon }: ModalProps) => {
     </ModalOverlay>
   )
 }
-
-export default Modal

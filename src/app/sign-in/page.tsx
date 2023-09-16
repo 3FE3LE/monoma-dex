@@ -1,9 +1,11 @@
 'use client'
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import 'twin.macro'
+import { Eye, EyeOff } from '@/components/Icons'
 import { Layout } from '@/components/UI'
 import Form, {
   FormError,
@@ -11,8 +13,6 @@ import Form, {
   FormInput,
   FormLabel,
 } from '@/components/UI/Form'
-import toast from 'react-hot-toast'
-import { Eye, EyeOff } from '@/components/Icons'
 
 type Inputs = {
   email: string
@@ -25,23 +25,30 @@ export default function SignIn() {
     handleSubmit,
     formState: { isValid, errors },
   } = useForm<Inputs>()
+
   const router = useRouter()
+
   const [error, setError] = useState<string>('')
+
   const [showPassword, setShowPassword] = useState(false)
 
   const onSubmit: SubmitHandler<Inputs> = async data => {
     if (isValid) {
       const waiting = toast.loading('Signing in...')
+
       const res = await signIn('credentials', {
         email: data?.email,
         password: data?.password,
         redirect: false,
       })
+
       if (res?.error) {
         setError(res.error)
         return toast.error(`${res?.error}`, { id: waiting })
       }
+
       toast.success('Successfully Logged!', { id: waiting })
+
       if (res?.ok) return router.push('/dashboard')
     }
   }

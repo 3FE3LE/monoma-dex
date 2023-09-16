@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import tw, { styled } from 'twin.macro'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import logo from '../../public/bulbasaur_icon.png'
-import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/react'
+import tw, { styled } from 'twin.macro'
 import { UserCircle } from '../Icons'
 import Popover from './Popover'
-import { useEffect } from 'react'
+import logo from '../../public/bulbasaur_icon.png'
 
 const NavbarWrapper = tw.nav`
   p-5
@@ -68,16 +66,8 @@ export const NavbarLink = styled.li<NavbarLinkProps>(({ $variant }) => [
   $variant === 'popover' &&
     tw`text-green-700 hover:(text-green-800 bg-slate-100) p-5 w-full`,
 ])
-const Navbar = () => {
-  const { data, status } = useSession()
-
-  useEffect(() => {
-    if (status === 'loading') {
-      toast.loading('Loading user data..')
-    } else {
-      toast.dismiss()
-    }
-  }, [status])
+export default function Navbar() {
+  const { status } = useSession()
 
   return (
     <NavbarWrapper>
@@ -89,7 +79,6 @@ const Navbar = () => {
         {status === 'authenticated' && (
           <Popover>
             <NavbarLink $variant="navbar">
-              {data.user?.name}
               <NavIcon>
                 <UserCircle />
               </NavIcon>
@@ -110,5 +99,3 @@ const Navbar = () => {
     </NavbarWrapper>
   )
 }
-
-export default Navbar

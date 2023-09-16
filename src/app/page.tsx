@@ -1,7 +1,6 @@
 'use client'
-import React from 'react'
-import { Layout } from '../components/UI'
 import tw from 'twin.macro'
+import { Layout } from '../components/UI'
 
 const HomeTitle = tw.h1`
   font-black

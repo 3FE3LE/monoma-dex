@@ -2,10 +2,10 @@ import mongoose from 'mongoose'
 
 const { MONGODB_URI, MONGODB_NAME } = process.env
 
-if (!MONGODB_URI ) {
+if (!MONGODB_URI) {
   throw new Error('MONGODB_URI must be defined')
 }
-if (!MONGODB_NAME ) {
+if (!MONGODB_NAME) {
   throw new Error('MONGODB_URI must be defined')
 }
 

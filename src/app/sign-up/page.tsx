@@ -1,11 +1,13 @@
 'use client'
 import { useState } from 'react'
-import { AxiosResponse } from 'axios'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { AxiosResponse } from 'axios'
+import toast from 'react-hot-toast'
 import { signUpUser } from '../../services/auth'
-import tw from 'twin.macro'
+import 'twin.macro'
+import { Eye, EyeOff } from '@/components/Icons'
 import { Layout } from '@/components/UI'
 import Form, {
   FormError,
@@ -13,8 +15,6 @@ import Form, {
   FormInput,
   FormLabel,
 } from '@/components/UI/Form'
-import { Eye, EyeOff } from '@/components/Icons'
-import toast from 'react-hot-toast'
 
 type Inputs = {
   fullName: string
@@ -36,19 +36,24 @@ export default function SignUp() {
   const onSubmit: SubmitHandler<Inputs> = async data => {
     if (isValid) {
       const waiting = toast.loading('Signing up...')
+
       const response = await signUpUser(data)
+
       setResponse(response)
+
       if (response && response.statusText === 'OK') {
         const res = await signIn('credentials', {
           email: data?.email,
           password: data?.password,
           redirect: false,
         })
-        console.log(res)
         if (res?.error) return setError(res.error)
+
         toast.success('Successfully Signed up!', { id: waiting })
+
         if (res?.ok) return router.push('/dashboard')
       }
+
       toast.error(`${response?.data.message}`, { id: waiting })
     }
   }

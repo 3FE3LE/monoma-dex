@@ -38,7 +38,11 @@ export async function POST(request: Request) {
     })
 
     const newUser = await user.save()
-    return NextResponse.json({_id: newUser.id, name: newUser.fullName, email: newUser.email} )
+    return NextResponse.json({
+      _id: newUser.id,
+      name: newUser.fullName,
+      email: newUser.email,
+    })
   } catch (error) {
     console.log(error)
     if (error instanceof Error) {

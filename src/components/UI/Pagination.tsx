@@ -1,20 +1,19 @@
 import tw from 'twin.macro'
-import ArrowLeft from './ArrowLeft'
-import ArrowRight from './ArrowRight'
+import { ArrowLeft, ArrowRight } from '../Icons'
 
 const PaginationWrapper = tw.div`
 z-1
   flex
   justify-evenly
-  mb-4
+  mb-5
   w-full
-  absolute
+  fixed
   bottom-0
 
 `
 
 const PaginationButton = tw.button`
-  p-4
+  p-3
   bg-green-100
   text-green-500
   font-bold

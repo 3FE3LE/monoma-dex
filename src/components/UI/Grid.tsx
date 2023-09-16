@@ -1,5 +1,6 @@
-import { Pokemon } from '@/types'
-import { getFormattedDate } from '@/utils'
+import { PokemonI } from '@/types'
+import { getFormattedDate } from '@/utils/getFormattedDate'
+import { staticBlurDataRyl } from '@/utils/staticBlurDataUrl'
 import Image from 'next/image'
 import tw from 'twin.macro'
 
@@ -9,6 +10,7 @@ const GridContainer = tw.section`
   gap-5
   p-5
   mx-auto
+  place-items-center
   w-full
   sm:grid-cols-2
   lg:grid-cols-3
@@ -24,18 +26,22 @@ const GridItem = tw.article`
   h-96
   w-full
   shadow-md
-  hover:scale-110
-  focus:scale-110
+  hover:scale-105
+  focus:scale-105
   transition-all
+  cursor-pointer
 `
 const GridItemImg = tw(Image)`
-absolute
+  absolute
   rounded-t-3xl
   bg-gradient-to-b
   from-white
+  via-white
   to-emerald-600
+  object-cover
+  object-center
   z-0
-  bg-top
+  max-h-72
   w-full
   aspect-square
   `
@@ -98,63 +104,71 @@ w-12
 text-center
 `
 type GridProps = {
-  items: Pokemon[]
+  items: PokemonI[]
   currentPage: number
+  handleClick: (id: number) => void
 }
 
 const todayDate = getFormattedDate()
 
-export default function Grid({ items, currentPage }: GridProps) {
-
-  const placeHolderItems = Array.from({ length: 10 }, (_, index) => ({name: 'PMKdex #'+index}));
+export default function Grid({ items, currentPage, handleClick }: GridProps) {
+  const placeHolderItems = Array.from({ length: 10 }, (_, index) => ({
+    name: 'PMKdex #' + index,
+  }))
 
   return (
     <GridContainer>
-      {items.length > 0 ? items.map(({ name }, i) => (
-        <GridItem key={name}>
-          <CardContainer>
-            <GridItemImg
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                (i + 1 + (10 * currentPage))
-              }.png`}
-              alt={`pokemon/${i + 1}.png`}
-              height={100}
-              width={100}
-            />
-            <CardInfo>
-              <CardSubTitle>{todayDate}</CardSubTitle>
-              <CardPill>#{(i + 1 + (10 * currentPage))}</CardPill>
-            </CardInfo>
-            <CardContent>
-              <CardTitle>{name}</CardTitle>
-              <div tw="text-sm text-green-600 ">#{name}</div>
-            </CardContent>
-          </CardContainer>
-        </GridItem>
-      )): placeHolderItems.map(({ name }, i) => (
-        <GridItem key={name}>
-          <CardContainer>
-            <GridItemImg
-              tw='animate-pulse'
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                0
-              }.png`}
-              alt={`pokemon/${0}.png`}
-              height={100}
-              width={100}
-            />
-            <CardInfo>
-              <CardSubTitle>{todayDate}</CardSubTitle>
-              <CardPill>4.0 kg</CardPill>
-            </CardInfo>
-            <CardContent>
-              <CardTitle>{name}</CardTitle>
-              <div tw="text-sm text-green-600 ">#{name}</div>
-            </CardContent>
-          </CardContainer>
-        </GridItem>
-      ))
-      }
+      {items.length > 0
+        ? items.map(({ name }, i) => (
+            <GridItem
+              onClick={() => handleClick(i + 1 + 10 * currentPage)}
+              key={name}
+            >
+              <CardContainer>
+                <GridItemImg
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                    i + 1 + 10 * currentPage
+                  }.png`}
+                  alt={`pokemon/${i + 1}.png`}
+                  height={100}
+                  width={100}
+                  placeholder='blur'
+                  blurDataURL={staticBlurDataRyl()}
+                />
+                <CardInfo>
+                  <CardSubTitle>{todayDate}</CardSubTitle>
+                  <CardPill>#{i + 1 + 10 * currentPage}</CardPill>
+                </CardInfo>
+                <CardContent>
+                  <CardTitle>{name}</CardTitle>
+                  <div tw="text-sm text-green-600 ">#{name}</div>
+                </CardContent>
+              </CardContainer>
+            </GridItem>
+          ))
+        : placeHolderItems.map(({ name }, i) => (
+            <GridItem key={name}>
+              <CardContainer>
+                <GridItemImg
+                  tw="animate-pulse"
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${0}.png`}
+                  alt={`pokemon/${0}.png`}
+                  height={100}
+                  width={100}
+                  placeholder='blur'
+                  blurDataURL={staticBlurDataRyl()}
+                />
+                <CardInfo>
+                  <CardSubTitle>{todayDate}</CardSubTitle>
+                  <CardPill>4.0 kg</CardPill>
+                </CardInfo>
+                <CardContent>
+                  <CardTitle>{name}</CardTitle>
+                  <div tw="text-sm text-green-600 ">#{name}</div>
+                </CardContent>
+              </CardContainer>
+            </GridItem>
+          ))}
     </GridContainer>
   )
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import GlobalStyles from '@/styles/GlobalStyles'
 import StyledComponentsRegistry from '@/lib/registry'
 import Providers from '@/components/Providers'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
   title: 'PMKdex',
@@ -20,6 +21,7 @@ export default function RootLayout({
           <StyledComponentsRegistry>
             <GlobalStyles />
             {children}
+            <Toaster />
           </StyledComponentsRegistry>
         </Providers>
       </body>

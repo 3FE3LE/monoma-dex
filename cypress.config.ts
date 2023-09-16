@@ -1,4 +1,4 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
@@ -6,18 +6,11 @@ export default defineConfig({
       // implement node event listeners here
     },
   },
-
   component: {
     devServer: {
-      framework: "next",
-      bundler: "webpack",
+      framework: 'next',
+      bundler: 'webpack',
     },
   },
-
-  component: {
-    devServer: {
-      framework: "next",
-      bundler: "webpack",
-    },
-  },
-});
+  projectId: 'xi8i4c',
+})

@@ -1,5 +1,6 @@
+import { mapPokemonResponse } from '@/mappers/pokemon.mapper'
+import { OriginalData, PokemonI } from '@/types'
 import axios from 'axios'
-import { Pokemon } from '../types'
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL
 
@@ -8,7 +9,7 @@ if (!baseURL) {
 }
 
 type AllPokemonResponse = {
-  results: Pokemon[]
+  results: PokemonI[]
   count: number
 }
 
@@ -22,17 +23,18 @@ export const getAllPokemon = async (
     )
     return { results: data.results, count: data.count }
   } catch (error) {
-    console.error('Error al obtener los Pokémon:', error)
+    console.error('Error to get Pokemon List:', error)
     return { results: [], count: 0 }
   }
 }
 
-export const getPokemonById = async (id: number): Promise<Pokemon | null> => {
+export const getPokemonById = async (id: number): Promise<PokemonI | null> => {
   try {
-    const response = await axios.get<Pokemon>(`${baseURL}/${id}`)
-    return response.data
+    const response = await axios.get(`${baseURL}${id}`)
+    const data = response.data as OriginalData
+    return mapPokemonResponse(data)
   } catch (error) {
-    console.error('Error al obtener el Pokémon:', error)
+    console.error('Error to get the Pokemon:', error)
     return null
   }
 }

@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
 import { signUpUser } from '../../services/auth'
-import 'twin.macro'
+import tw from 'twin.macro'
 import { Eye, EyeOff } from '@/components/Icons'
 import { Layout } from '@/components/UI'
 import Form, {
@@ -37,14 +37,12 @@ export default function SignUp() {
     if (isValid) {
       const waiting = toast.loading('Signing up...')
 
-      const response = await signUpUser(data)
-
-      setResponse(response)
-
-      if (response && response.statusText === 'OK') {
+      await signUpUser(data).then(async response => {
+        setResponse(response)
+        console.log(response)
         const res = await signIn('credentials', {
-          email: data?.email,
-          password: data?.password,
+          email: data.email,
+          password: data.password,
           redirect: false,
         })
         if (res?.error) return setError(res.error)
@@ -52,8 +50,7 @@ export default function SignUp() {
         toast.success('Successfully Signed up!', { id: waiting })
 
         if (res?.ok) return router.push('/dashboard')
-      }
-
+      })
       toast.error(`${response?.data.message}`, { id: waiting })
     }
   }
@@ -64,11 +61,7 @@ export default function SignUp() {
 
   return (
     <Layout>
-      <Form
-        title="Sign Up"
-        isValid={isValid}
-        handleSubmit={handleSubmit(onSubmit)}
-      >
+      <Form title="Sign Up" handleSubmit={handleSubmit(onSubmit)}>
         <div tw="mb-4">
           <FormError>{error}</FormError>
           <FormError>
@@ -80,7 +73,8 @@ export default function SignUp() {
             id="fullName"
             {...register('fullName', {
               required: { value: true, message: 'Full name is required' },
-              maxLength: { value: 20, message: 'Max 20 characters' },
+              maxLength: { value: 50, message: 'Max 50 characters' },
+              minLength: { value: 3, message: 'Min 3 characters' },
             })}
           />
           <FormError>{errors.fullName?.message}</FormError>
@@ -102,7 +96,7 @@ export default function SignUp() {
             type={showPassword ? 'text' : 'password'}
             id="password"
             {...register('password', {
-              required: { value: true, message: 'password is required' },
+              required: { value: true, message: 'Password is required' },
               minLength: { value: 8, message: 'Min 8 characters' },
             })}
           />

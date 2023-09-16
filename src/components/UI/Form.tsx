@@ -18,7 +18,7 @@ export const FormInput = tw.input`
   focus:(outline-none ring-green-500 border-green-500 scale-105)
   invalid:(ring-red-500 border-red-500)
 `
-export const FormError = tw.span`
+export const FormError = tw.div`
   text-red-500
   transition-all
 `
@@ -61,22 +61,16 @@ const FormButton = tw.button`
 
 type FormProps = {
   title: string
-  isValid: boolean
   children: React.ReactNode
   handleSubmit: FormEventHandler<HTMLFormElement>
 }
-export default function Form({
-  title,
-  handleSubmit,
-  children,
-  isValid,
-}: FormProps) {
+export default function Form({ title, handleSubmit, children }: FormProps) {
   return (
     <FormWrapper>
       <FormTitle>{title}</FormTitle>
       <form onSubmit={handleSubmit}>
         {children}
-        <FormButton disabled={!isValid}>{title}</FormButton>
+        <FormButton>{title}</FormButton>
       </form>
     </FormWrapper>
   )

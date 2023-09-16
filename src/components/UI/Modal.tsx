@@ -22,9 +22,10 @@ const ModalOverlay = tw.div`
 const ModalContainer = tw.div`
   bg-white
   m-5
-  max-w-4xl
   w-full
   rounded-3xl
+  max-w-4xl
+  max-h-screen
 `
 
 const ModalHeader = tw.div`

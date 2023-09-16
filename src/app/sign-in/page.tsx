@@ -59,11 +59,7 @@ export default function SignIn() {
 
   return (
     <Layout>
-      <Form
-        title="Sign in"
-        isValid={isValid}
-        handleSubmit={handleSubmit(onSubmit)}
-      >
+      <Form title="Sign in" handleSubmit={handleSubmit(onSubmit)}>
         <div tw="mb-4">
           <FormError>{error}</FormError>
           <FormLabel htmlFor="email">Email</FormLabel>
@@ -82,7 +78,7 @@ export default function SignIn() {
             type={showPassword ? 'text' : 'password'}
             id="password"
             {...register('password', {
-              required: { value: true, message: 'password is required' },
+              required: { value: true, message: 'Password is required' },
               minLength: { value: 8, message: 'Min 8 characters' },
             })}
           />

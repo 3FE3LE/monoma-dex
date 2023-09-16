@@ -1,16 +1,14 @@
 'use client'
 import { Grid, Layout, Modal, Pagination } from '@/components/UI'
-import { Pokemon } from '../../types'
+import { PokemonI } from '../../types'
 import { useEffect, useState } from 'react'
 import { getAllPokemon, getPokemonById } from '../../services/pokemons'
 
 export default function Dashboard() {
-
   const [currentPage, setCurrentPage] = useState(0)
   const [isOpenModal, setIsOpenModal] = useState(false)
-  const [IsLoading, setIsLoading] = useState(false)
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([])
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null)
+  const [pokemonList, setPokemonList] = useState<PokemonI[]>([])
+  const [pokemon, setPokemon] = useState<PokemonI>(pokemonList[0])
 
   useEffect(() => {
     const pageSize = 10
@@ -26,17 +24,15 @@ export default function Dashboard() {
 
   const handleCloseModal = () => {
     setIsOpenModal(false)
-    setPokemon(null)
   }
 
   const handleCardClick = (id: number) => {
-    setIsLoading(true)
-    getPokemonById(id)
-      .then(data => {
+    getPokemonById(id).then(data => {
+      if (data !== null) {
         setPokemon(data)
-        setIsLoading(false)
-      })
-      .finally(() => setIsOpenModal(true))
+        setIsOpenModal(true)
+      }
+    })
   }
 
   return (

@@ -33,8 +33,8 @@ const handler = NextAuth({
       if (user) token.user = user
       return token
     },
-    session({ session, token }) {
-      session.user = {name:token.user.fullName, email:token.user.email} 
+    session({ session, user }) {
+      session.user = user 
       return session
     },
   },

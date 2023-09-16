@@ -25,10 +25,10 @@ describe('Navigation', () => {
     cy.get('button').click()
 
     // div tag element will be visible whit error validation below of email input
-    cy.get('div[class="Form__FormError-sc-2ql3du-2 Rihzm"]').contains('Email is required').should('be.visible')
+    cy.get('div[class="Form__FormError-sc-2ql3du-2"]').contains('Email is required').should('be.visible')
 
     // div tag element will be visible whit error validation below of password input
-    cy.get('div[class="Form__FormError-sc-2ql3du-2 Rihzm"]').last().contains('Password is required').should('be.visible')
+    cy.get('div[class="Form__FormError-sc-2ql3du-2"]').last().contains('Password is required').should('be.visible')
 
     cy.get('span').click()
 

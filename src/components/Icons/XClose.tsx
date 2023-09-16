@@ -1,4 +1,4 @@
-export default function ArrowRight() {
+export default function XClose() {
   return (
     <svg
       width="24"
@@ -8,11 +8,11 @@ export default function ArrowRight() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M5 12H19M19 12L12 5M19 12L12 19"
+        d="M18 6L6 18M6 6L18 18"
         stroke="#00916E"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

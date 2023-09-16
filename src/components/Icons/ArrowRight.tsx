@@ -1,4 +1,4 @@
-export default function ArrowLeft() {
+export default function ArrowRight() {
   return (
     <svg
       width="24"
@@ -8,11 +8,11 @@ export default function ArrowLeft() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M19 12H5M5 12L12 19M5 12L12 5"
+        d="M5 12H19M19 12L12 5M19 12L12 19"
         stroke="#00916E"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

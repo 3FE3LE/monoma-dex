@@ -2,17 +2,18 @@ import React, { FormEventHandler } from 'react'
 import { UseFormRegister } from 'react-hook-form'
 import tw from 'twin.macro'
 
-type FormProps = {
-  title: string
-  children: React.ReactNode
-  handleSubmit: FormEventHandler<HTMLFormElement>
-}
+const FormTitle = tw.h1`
+text-green-600
+text-3xl
+font-bold
+mb-4
+`
 
 export const FormLabel = tw.label`
 block
 mb-2
 font-bold
-text-gray-700
+text-green-700
 `
 
 export const FormInput = tw.input`
@@ -21,9 +22,24 @@ px-3
 py-2
 border
 rounded-md
-focus:outline-none
-focus:ring
-focus:border-blue-500
+transition-all
+text-green-900
+focus:(outline-none ring-green-500 border-green-500 scale-105)
+invalid:(ring-red-500 border-red-500)
+`
+export const FormError = tw.span`
+text-red-500
+transition-all
+`
+
+export const FormIcon = tw.span`
+  p-2
+  rounded-md
+  absolute
+  right-0
+  bottom-0
+  transition-all
+  hover:(scale-105 bg-green-100)
 `
 const FormWrapper = tw.div`
 max-w-sm
@@ -35,25 +51,39 @@ rounded-3xl
 w-full
 `
 
+
+
 const FormButton = tw.button`
 mt-4
 px-4
 py-2
-bg-blue-600
+bg-green-600
 text-white
 rounded-md
-hover:bg-blue-600
-focus:outline-none
-focus:ring
-focus:bg-blue-600
+transition-all
+hover:(bg-green-600 scale-105)
+focus:(outline-none ring bg-green-600)
+disabled:(bg-green-100 text-green-500 hover:(bg-green-200 text-green-700))
 `
-export default function Form({ title, handleSubmit, children }: FormProps) {
+
+type FormProps = {
+  title: string
+  isValid: boolean
+  children: React.ReactNode
+  handleSubmit: FormEventHandler<HTMLFormElement>
+}
+export default function Form({
+  title,
+  handleSubmit,
+  children,
+  isValid,
+}: FormProps) {
   return (
     <FormWrapper>
-      <h2 tw="text-xl font-bold mb-4">{title}</h2>
+      <FormTitle>{title}</FormTitle>
       <form onSubmit={handleSubmit}>
         {children}
-        <FormButton type="submit">{title}</FormButton>
+        <FormButton disabled={!isValid}>{title}</FormButton>
       </form>
     </FormWrapper>
   )

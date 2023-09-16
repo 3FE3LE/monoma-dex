@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import GlobalStyles from '@/styles/GlobalStyles'
 import StyledComponentsRegistry from '@/lib/registry'
+import Providers from '@/components/Providers'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
-  title: 'Twin example',
-  description: '',
+  title: 'PMKdex',
+  description: 'explore Pokemon data',
 }
 
 export default function RootLayout({
@@ -15,10 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyles />
-          {children}
-        </StyledComponentsRegistry>
+        <Providers>
+          <StyledComponentsRegistry>
+            <GlobalStyles />
+            {children}
+            <Toaster />
+          </StyledComponentsRegistry>
+        </Providers>
       </body>
     </html>
   )

@@ -27,8 +27,8 @@ This is a Pokedex application built with a modern tech stack including Twin, Nex
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/pokedex-app.git
-cd pokedex-app
+git clone https://github.com/3FE3LE/monoma-dex.git
+cd monoma-dex
 ```
 
 2. Install dependencies:
@@ -41,7 +41,11 @@ npm install
 
 ```env
 NEXT_PUBLIC_API_URL=https://api.pokemon.com/v1
-JWT_SECRET=your-secret-key
+MONGODB_URI=mongodb+srv://MONOMA:Zfb1Yz51306o3WvV@cluster0.rmhcyvf.mongodb.net/?retryWrites=true&w=majority
+MONGODB_NAME=pkmdex
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=monomadex
+NEXT_PUBLIC_API_URL=https://pokeapi.co/api/v2/pokemon/
 ```
 
 4. Start the development server:

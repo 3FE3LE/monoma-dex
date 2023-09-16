@@ -50,8 +50,8 @@ export default function SignUp() {
         toast.success('Successfully Signed up!', { id: waiting })
 
         if (res?.ok) return router.push('/dashboard')
-      })
-      toast.error(`${response?.data.message}`, { id: waiting })
+      }).catch((error)=> 
+      toast.error(`${error}`, { id: waiting }))
     }
   }
 

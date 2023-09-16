@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import 'twin.macro'
+import tw from 'twin.macro'
 import { Eye, EyeOff } from '@/components/Icons'
 import { Layout } from '@/components/UI'
 import Form, {

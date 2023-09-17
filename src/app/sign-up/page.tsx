@@ -45,13 +45,15 @@ export default function SignUp() {
           password: data.password,
           redirect: false,
         })
+        if (response?.status === 400) {
+          return toast.error(`${response.data.message}`, { id: waiting })
+        }
         if (res?.error) return setError(res.error)
 
         toast.success('Successfully Signed up!', { id: waiting })
 
-        if (res?.ok) return router.push('/dashboard')
-      }).catch((error)=> 
-      toast.error(`${error}`, { id: waiting }))
+        return router.push('/dashboard')
+      })
     }
   }
 

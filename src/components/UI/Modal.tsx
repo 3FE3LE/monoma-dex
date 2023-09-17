@@ -20,19 +20,24 @@ const ModalOverlay = tw.div`
 `
 
 const ModalContainer = tw.div`
+  relative
   bg-white
   m-5
   w-full
   rounded-3xl
   max-w-4xl
-  max-h-screen
+  box-border
+  max-h-[calc(100vh-2rem)]
+  sm:max-h-screen
 `
 
 const ModalHeader = tw.div`
-  flex
+  absolute
   justify-between
   items-center
   p-5
+  flex
+  w-full
   `
 
 const ModalTitle = tw.h1`
@@ -55,16 +60,16 @@ const ModalContent = tw.section`
 `
 const ModalImg = tw(Image)`
   object-contain
-  max-w-md
   w-full
   aspect-square
   bg-green-100
   rounded-3xl
+  sm:max-w-md
 `
 const ModalInfo = tw.div`
   bg-slate-100
   w-full
-  h-full
+  h-auto
   p-5
   rounded-3xl
   flex
@@ -72,6 +77,7 @@ const ModalInfo = tw.div`
   gap-5
   max-h-96
   overflow-scroll
+  sm:h-full
 `
 
 const ModalCloseButton = tw.button`
@@ -107,9 +113,8 @@ export default function Modal({ isOpen, onClose, pokemon }: ModalProps) {
 
   const movements = moves.slice(0, 4)
   const mainType = types[0]
-  const handsToFoots = (height/3).toFixed(1)
-  const pokemonLbs = weight/10
-
+  const handsToFoots = (height / 3).toFixed(1)
+  const pokemonLbs = weight / 10
 
   return (
     <ModalOverlay>
@@ -120,7 +125,7 @@ export default function Modal({ isOpen, onClose, pokemon }: ModalProps) {
             <XClose />
           </ModalCloseButton>
         </ModalHeader>
-        <ModalContent>
+        <ModalContent css={{ maxHeight: 'inherit' }}>
           <ModalImg
             src={String(img)}
             alt={String(img)}
@@ -138,19 +143,15 @@ export default function Modal({ isOpen, onClose, pokemon }: ModalProps) {
             </div>
             <div tw="flex gap-2 items-center">
               <ModalLabel>types: </ModalLabel>
-                <PokemonTypePill type={mainType} data={types} />
+              <PokemonTypePill type={mainType} data={types} />
             </div>
             <div tw="flex gap-2 flex-wrap items-center">
               <ModalLabel>abilities: </ModalLabel>
-                <PokemonTypePill
-                  
-                  type={mainType}
-                  data={abilities}
-                />
+              <PokemonTypePill type={mainType} data={abilities} />
             </div>
             <div tw="flex gap-2 flex-wrap items-center">
               <ModalLabel tw="inline">moves: </ModalLabel>
-                <PokemonTypePill  type={mainType} data={movements} />
+              <PokemonTypePill type={mainType} data={movements} />
             </div>
           </ModalInfo>
         </ModalContent>

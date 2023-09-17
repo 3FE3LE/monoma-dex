@@ -14,7 +14,7 @@ describe('Validate Form', () => {
 
     // The new page should contain a button with the value "Sign In"
     // On button pressed without dirty fields
-    cy.get('button').contains('Sign in').should('be.visible').click()
+    cy.get('button').contains('Sign in').should('be.visible').click().click()
 
     // The email input will be focused waiting to type a email
     cy.get('input[name="email"]').should('be.focus')

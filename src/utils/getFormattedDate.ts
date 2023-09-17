@@ -1,4 +1,4 @@
-export function getFormattedDate() {
+export default function getFormattedDate() {
   const months = [
     'January',
     'February',

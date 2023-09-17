@@ -1,11 +1,13 @@
 'use client'
 import { useState } from 'react'
-import { AxiosResponse } from 'axios'
-import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { AxiosResponse } from 'axios'
+import toast from 'react-hot-toast'
 import { signUpUser } from '../../services/auth'
 import tw from 'twin.macro'
+import { Eye, EyeOff } from '@/components/Icons'
 import { Layout } from '@/components/UI'
 import Form, {
   FormError,
@@ -13,8 +15,6 @@ import Form, {
   FormInput,
   FormLabel,
 } from '@/components/UI/Form'
-import { Eye, EyeOff } from '@/components/Icons'
-import toast from 'react-hot-toast'
 
 type Inputs = {
   fullName: string
@@ -36,20 +36,24 @@ export default function SignUp() {
   const onSubmit: SubmitHandler<Inputs> = async data => {
     if (isValid) {
       const waiting = toast.loading('Signing up...')
-      const response = await signUpUser(data)
-      setResponse(response)
-      if (response && response.statusText === 'OK') {
+
+      await signUpUser(data).then(async response => {
+        setResponse(response)
+        console.log(response)
         const res = await signIn('credentials', {
-          email: data?.email,
-          password: data?.password,
+          email: data.email,
+          password: data.password,
           redirect: false,
         })
-        console.log(res)
+        if (response?.status === 400) {
+          return toast.error(`${response.data.message}`, { id: waiting })
+        }
         if (res?.error) return setError(res.error)
+
         toast.success('Successfully Signed up!', { id: waiting })
-        if (res?.ok) return router.push('/dashboard')
-      }
-      toast.error(`${response?.data.message}`, { id: waiting })
+
+        return router.push('/dashboard')
+      })
     }
   }
 
@@ -59,11 +63,7 @@ export default function SignUp() {
 
   return (
     <Layout>
-      <Form
-        title="Sign Up"
-        isValid={isValid}
-        handleSubmit={handleSubmit(onSubmit)}
-      >
+      <Form title="Sign Up" handleSubmit={handleSubmit(onSubmit)}>
         <div tw="mb-4">
           <FormError>{error}</FormError>
           <FormError>
@@ -75,7 +75,8 @@ export default function SignUp() {
             id="fullName"
             {...register('fullName', {
               required: { value: true, message: 'Full name is required' },
-              maxLength: { value: 20, message: 'Max 20 characters' },
+              maxLength: { value: 50, message: 'Max 50 characters' },
+              minLength: { value: 3, message: 'Min 3 characters' },
             })}
           />
           <FormError>{errors.fullName?.message}</FormError>
@@ -97,7 +98,7 @@ export default function SignUp() {
             type={showPassword ? 'text' : 'password'}
             id="password"
             {...register('password', {
-              required: { value: true, message: 'password is required' },
+              required: { value: true, message: 'Password is required' },
               minLength: { value: 8, message: 'Min 8 characters' },
             })}
           />

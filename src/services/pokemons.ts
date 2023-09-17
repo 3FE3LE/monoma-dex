@@ -1,6 +1,6 @@
-import { mapPokemonResponse } from '@/mappers/pokemon.mapper'
-import { OriginalData, PokemonI } from '@/types'
 import axios from 'axios'
+import { OriginalData, PokemonI } from '@/types'
+import { mapPokemonResponse } from '@/mappers/pokemon.mapper'
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL
 

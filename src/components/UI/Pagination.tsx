@@ -33,11 +33,11 @@ interface PaginationProps {
   onPageChange: (newPage: number) => void
 }
 
-const Pagination = ({
+export default function Pagination({
   currentPage,
   totalPages,
   onPageChange,
-}: PaginationProps) => {
+}: PaginationProps) {
   const canGoPrevious = currentPage > 0
   const canGoNext = currentPage < totalPages
 
@@ -67,5 +67,3 @@ const Pagination = ({
     </PaginationWrapper>
   )
 }
-
-export default Pagination

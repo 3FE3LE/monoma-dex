@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
+import { Toaster } from 'react-hot-toast'
 import GlobalStyles from '@/styles/GlobalStyles'
 import StyledComponentsRegistry from '@/lib/registry'
 import Providers from '@/components/Providers'
-import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
   title: 'PMKdex',

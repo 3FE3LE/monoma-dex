@@ -1,7 +1,6 @@
-import { PokemonI } from '@/types'
-import { getFormattedDate } from '@/utils/getFormattedDate'
-import { staticBlurDataRyl } from '@/utils/staticBlurDataUrl'
 import Image from 'next/image'
+import { PokemonI } from '@/types'
+import { getFormattedDate, staticBlurDataUrl } from '@/utils'
 import tw from 'twin.macro'
 
 const GridContainer = tw.section`
@@ -96,12 +95,12 @@ const CardSubTitle = tw.h2`
   to-white
 `
 const CardPill = tw.span`
-bg-white
-text-green-700
-font-black
-rounded-full
-w-12
-text-center
+  bg-white
+  text-green-700
+  font-black
+  rounded-full
+  w-12
+  text-center
 `
 type GridProps = {
   items: PokemonI[]
@@ -133,7 +132,7 @@ export default function Grid({ items, currentPage, handleClick }: GridProps) {
                   height={100}
                   width={100}
                   placeholder='blur'
-                  blurDataURL={staticBlurDataRyl()}
+                  blurDataURL={staticBlurDataUrl()}
                 />
                 <CardInfo>
                   <CardSubTitle>{todayDate}</CardSubTitle>
@@ -156,7 +155,7 @@ export default function Grid({ items, currentPage, handleClick }: GridProps) {
                   height={100}
                   width={100}
                   placeholder='blur'
-                  blurDataURL={staticBlurDataRyl()}
+                  blurDataURL={staticBlurDataUrl()}
                 />
                 <CardInfo>
                   <CardSubTitle>{todayDate}</CardSubTitle>

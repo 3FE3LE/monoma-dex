@@ -1,5 +1,5 @@
 
-# Pokedex App with Twin, Next.js, Styled Components, TypeScript, Tailwind, JSON Web Token, React Hot Toast
+# Pokedex App with Twin, Next.js, Styled Components, TypeScript, Tailwind, Next Auth, React Hot Toast
 
 ## Overview
 
@@ -58,7 +58,8 @@ npm run dev
 To run unit tests, use the following command:
 
 ```bash
-npm run test
+npm run test:e2e
+nom run test:component
 ```
 
 ## GitHub Actions Integration

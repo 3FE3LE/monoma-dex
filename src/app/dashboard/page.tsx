@@ -1,8 +1,8 @@
 'use client'
-import { Grid, Layout, Modal, Pagination } from '@/components/UI'
-import { PokemonI } from '../../types'
 import { useEffect, useState } from 'react'
 import { getAllPokemon, getPokemonById } from '../../services/pokemons'
+import { Grid, Layout, Modal, Pagination } from '@/components/UI'
+import { PokemonI } from '../../types'
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(0)

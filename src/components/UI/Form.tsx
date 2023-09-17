@@ -1,37 +1,27 @@
-import React, { FormEventHandler } from 'react'
-import { UseFormRegister } from 'react-hook-form'
+import { FormEventHandler } from 'react'
 import tw from 'twin.macro'
 
-const FormTitle = tw.h1`
-text-green-600
-text-3xl
-font-bold
-mb-4
-`
-
 export const FormLabel = tw.label`
-block
-mb-2
-font-bold
-text-green-700
+  block
+  mb-2
+  font-bold
+  text-green-700
 `
-
 export const FormInput = tw.input`
-w-full
-px-3
-py-2
-border
-rounded-md
-transition-all
-text-green-900
-focus:(outline-none ring-green-500 border-green-500 scale-105)
-invalid:(ring-red-500 border-red-500)
+  w-full
+  px-3
+  py-2
+  border
+  rounded-md
+  transition-all
+  text-green-900
+  focus:(outline-none ring-green-500 border-green-500 scale-105)
+  invalid:(ring-red-500 border-red-500)
 `
-export const FormError = tw.span`
-text-red-500
-transition-all
+export const FormError = tw.div`
+  text-red-500
+  transition-all
 `
-
 export const FormIcon = tw.span`
   p-2
   rounded-md
@@ -41,49 +31,46 @@ export const FormIcon = tw.span`
   transition-all
   hover:(scale-105 bg-green-100)
 `
-const FormWrapper = tw.div`
-max-w-sm
-mx-auto
-p-6
-bg-white
-shadow-md
-rounded-3xl
-w-full
+const FormTitle = tw.h1`
+  text-green-600
+  text-3xl
+  font-bold
+  mb-4
 `
-
-
-
+const FormWrapper = tw.div`
+  max-w-sm
+  mx-auto
+  p-6
+  bg-white
+  shadow-md
+  rounded-3xl
+  w-full
+`
 const FormButton = tw.button`
-mt-4
-px-4
-py-2
-bg-green-600
-text-white
-rounded-md
-transition-all
-hover:(bg-green-600 scale-105)
-focus:(outline-none ring bg-green-600)
-disabled:(bg-green-100 text-green-500 hover:(bg-green-200 text-green-700))
+  mt-4
+  px-4
+  py-2
+  bg-green-600
+  text-white
+  rounded-md
+  transition-all
+  hover:(bg-green-600 scale-105)
+  focus:(outline-none ring bg-green-600)
+  disabled:(bg-green-100 text-green-500 hover:(bg-green-200 text-green-700))
 `
 
 type FormProps = {
   title: string
-  isValid: boolean
   children: React.ReactNode
   handleSubmit: FormEventHandler<HTMLFormElement>
 }
-export default function Form({
-  title,
-  handleSubmit,
-  children,
-  isValid,
-}: FormProps) {
+export default function Form({ title, handleSubmit, children }: FormProps) {
   return (
     <FormWrapper>
       <FormTitle>{title}</FormTitle>
       <form onSubmit={handleSubmit}>
         {children}
-        <FormButton disabled={!isValid}>{title}</FormButton>
+        <FormButton>{title}</FormButton>
       </form>
     </FormWrapper>
   )

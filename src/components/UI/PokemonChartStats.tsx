@@ -30,7 +30,7 @@ export type PokemonChartStatsProps = {
   data: Stats[]
 }
 
-export function PokemonChartStats({ data }: PokemonChartStatsProps) {
+export default function PokemonChartStats({ data }: PokemonChartStatsProps) {
   const dataTransformed = mapPokemonStatsToCharts(data)
 
   return (

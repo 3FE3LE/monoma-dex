@@ -33,7 +33,7 @@ const typeColors: Record<string, { bg: string; text: string }> = {
   fairy: { bg: '#FAD5E5', text: '#2D3748' },
 }
 
-const PokemonTypePill = ({ type, data }: PokemonTypeProps) => {
+export default function PokemonTypePill({ type, data }: PokemonTypeProps) {
   return (
     <>
       {data.map(item => {
@@ -54,5 +54,3 @@ const PokemonTypePill = ({ type, data }: PokemonTypeProps) => {
     </>
   )
 }
-
-export default PokemonTypePill

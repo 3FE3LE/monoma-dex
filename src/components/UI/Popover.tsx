@@ -29,7 +29,7 @@ const handleSignOut = () => {
   signOut({ callbackUrl: '/' })
 }
 
-const Popover: React.FC<PopoverProps> = ({ children }) => {
+export default function Popover({ children }: PopoverProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleTogglePopover = () => {
@@ -57,5 +57,3 @@ const Popover: React.FC<PopoverProps> = ({ children }) => {
     </PopoverContainer>
   )
 }
-
-export default Popover

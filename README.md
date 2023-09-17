@@ -40,7 +40,6 @@ npm install
 3. Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-NEXT_PUBLIC_API_URL=https://api.pokemon.com/v1
 MONGODB_URI=mongodb+srv://MONOMA:Zfb1Yz51306o3WvV@cluster0.rmhcyvf.mongodb.net/?retryWrites=true&w=majority
 MONGODB_NAME=pkmdex
 NEXTAUTH_URL=http://localhost:3000
